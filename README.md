@@ -64,11 +64,16 @@ Designed for immediate site reliability intervention and automated orchestrator 
 
 ---
 
-## 🤝 Let's Connect
+## 📖 API Documentation & Contract
+To explore the endpoints, request/response schemas, and JWT security requirements of the VellumFlow platform, view the official API documentation. 
+*(Note: Live Swagger UI is disabled in production for security; the link below provides a static, read-only view of the OpenAPI specification).*
 
-I am a Senior Backend Specialist actively seeking challenging engineering roles. I would be thrilled to discuss the specific implementation details, trade-offs, and architectural decisions of VellumFlow in a technical interview.
-
-* [https://linkedin.com/in/kosgey-laban]
-* [devynlab@gmail.com]
+👉 **[View VellumFlow API Documentation on Postman](https://documenter.getpostman.com/view/51502914/2sBXcHhdoW)**
 
 ---
+
+## 🤝 Let's Connect
+I am a Senior Backend Specialist actively seeking challenging engineering roles. I would be thrilled to discuss the specific implementation details, trade-offs, and architectural decisions of VellumFlow in a technical interview.
+
+* **LinkedIn:** [linkedin.com/in/kosgey-laban](https://linkedin.com/in/kosgey-laban)
+* **Email:** [devynlab@gmail.com](mailto:devynlab@gmail.com), [kipkosgeilaban98@gmail.com](mailto:kipkosgeilaban98@gmail.com)
