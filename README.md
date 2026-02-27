@@ -8,7 +8,7 @@ VellumFlow is a distributed, multi-tenant workflow automation platform designed 
 
 ---
 
-```
+```mermaid
   graph TD
     %% Client Tier
     subgraph Client Tier [Frontend Application]
