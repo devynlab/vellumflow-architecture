@@ -8,6 +8,72 @@ VellumFlow is a distributed, multi-tenant workflow automation platform designed 
 
 ---
 
+```
+  graph TD
+    %% Client Tier
+    subgraph Client Tier [Frontend Application]
+        UI[Next.js 16 / React 19]
+        Axios[Axios Interceptor Lock-Queue]
+        WS_Client[STOMP.js WebSocket Client]
+        UI --> Axios
+        UI --> WS_Client
+    end
+
+    %% Security & Routing
+    subgraph Security Layer
+        AuthFilter[Spring Security Filter Chain]
+        JWT[JWT & HttpOnly Cookie Validator]
+        Axios -- REST / HTTPS --> AuthFilter
+        WS_Client -- WSS Secure --> AuthFilter
+        AuthFilter --> JWT
+    end
+
+    %% Application Tier
+    subgraph Application Tier [Spring Boot 4.x / Java 21 Virtual Threads]
+        REST[REST Controllers]
+        WS_Broker[WebSocket Broker]
+        EventBus((ApplicationEventPublisher))
+        
+        subgraph Core Domains
+            Auth[Auth & Token Upsert Engine]
+            Order[Marketplace & QA Engine]
+            Finance[Transactional Financial Ledger]
+            Worker[Async Background Workers]
+        end
+        
+        JWT --> REST
+        AuthFilter -- Authenticated WSS --> WS_Broker
+        
+        REST --> Auth
+        REST --> Order
+        REST --> Finance
+        
+        Order -- Publishes Events --> EventBus
+        Finance -- Publishes Events --> EventBus
+        
+        EventBus -- Asynchronous --> Worker
+        Worker -- Broadcasts Updates --> WS_Broker
+    end
+
+    %% Data & External Services
+    subgraph Data & Storage Tier
+        DB[(PostgreSQL / Neon DB)]
+        Flyway[Flyway Schema Migrations]
+        S3[Amazon S3 / Object Storage]
+        Resend[Resend Email API]
+        
+        Auth -- Atomic Overwrite --> DB
+        Order -- JPA @EntityGraph --> DB
+        Finance -- ACID @Transactional --> DB
+        Flyway -- CI/CD Versioning --> DB
+        
+        Worker -- Store Assets --> S3
+        Worker -- Trigger Alerts --> Resend
+    end
+```
+
+---
+
 ## 🏗 Tech Stack & Infrastructure
 
 The system operates on a decoupled architecture, prioritizing strict type safety, zero-trust security, and horizontal scalability.
